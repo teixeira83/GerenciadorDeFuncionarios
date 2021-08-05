@@ -55,6 +55,13 @@ const EmployedTable = () => {
     })()
   }, [])
 
+  const formatAdmissionDate = (employeeAdmissionDate) => {
+    const rawAdmissionDate = employeeAdmissionDate
+    const formatedAdmissionDate = new Date(rawAdmissionDate)
+                                      .toLocaleDateString('pt-BR', {timeZone: 'UTC'})
+    return formatedAdmissionDate                        
+  }
+
   const fomartPhoneNumber = (employeePhoneNumber) => {
 
     const rawEmployeePhoneNumber = employeePhoneNumber
@@ -86,9 +93,7 @@ const EmployedTable = () => {
         </TableHead>
         <TableBody>
         {employees.map((employee) => {
-          const rawAdmissionDate = employee.admission_date
-          const formatedAdmissionDate = new Date(rawAdmissionDate)
-                                            .toLocaleDateString('pt-BR', {timeZone: 'UTC'})
+          const formatedAdmissionDate = formatAdmissionDate(employee.admission_date)
           const formatedPhoneNumber = fomartPhoneNumber(employee.phone)
           return (
             <tr key={employee.id}>
