@@ -9,13 +9,20 @@ const Title = styled.h2`
   margin-left: ${gaps.medium};
 `
 
+const SearchContainer = styled.div`
+  display: flex;
+  margin-top: ${gaps.small};
+`
+
 const Home = () => {
   const [text, setText] = useState('')
 
   return (
     <main>
-      <Title>Funcionários</Title>
-      <SearchInput value={text} onChange={e=> setText(e.target.value)} />
+      <SearchContainer>
+        <Title>Funcionários</Title>
+        <SearchInput value={text} onChange={e=> setText(e.target.value)} />
+      </SearchContainer>
       <EmployedTable textToSearch={text} />
     </main>   
   )  
