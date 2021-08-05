@@ -7,7 +7,7 @@ const HeaderContainer = styled.header`
   background-color: ${colors.primary};
   height: 60px;
   display: flex;
-  justify-content: center;
+  justify-content: left;
   align-items: center;
 `
 
