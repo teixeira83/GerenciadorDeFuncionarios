@@ -27,19 +27,22 @@ const TableHead = styled.thead`
 const TableBody = styled.tbody`
   width: 100%;
   height: 100vh;
-  
   & tr {
+    height: 50px;
     box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.2);
   }
   
   & > tr > td {
     padding: 0px;
+    text-align: center; 
+    vertical-align: middle;
   }
 `
 
 const EmployeeImage = styled.img`
-  width: 50px;
-  height: 50px;
+  width: 34px;
+  height: 33px;
+  border-radius: 30px;
 `
 
 const EmployedTable = () => {
@@ -65,15 +68,19 @@ const EmployedTable = () => {
           </tr>
         </TableHead>
         <TableBody>
-        {employees.map((employee) => (
-          <tr>
-            <td>{<EmployeeImage src={employee.image} alt='Foto do Funcionário' />}</td>
-            <td>{employee.name}</td>
-            <td>{employee.job}</td>
-            <td>{employee.admission_date}</td>
-            <td>{employee.phone}</td>
-         </tr> 
-        ))}
+        {employees.map((employee) => {
+          const rawAdmissionDate = employee.admission_date
+          const formatedAdmissionDate = new Date(rawAdmissionDate)
+                                            .toLocaleDateString('pt-BR', {timeZone: 'UTC'})
+          return (
+            <tr key={employee.id}>
+              <td>{<EmployeeImage src={employee.image} alt='Foto do Funcionário' />}</td>
+              <td>{employee.name}</td>
+              <td>{employee.job}</td>
+              <td>{formatedAdmissionDate}</td>
+              <td>{employee.phone}</td>
+            </tr> 
+          )})}
         </TableBody>
       </Table>
     </Container>
