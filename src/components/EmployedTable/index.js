@@ -67,7 +67,9 @@ const EmployedTable = () => {
       firstPartOfPhoneNumber = rawEmployeePhoneNumber.substring(4, 9)
     }
     const secondPartOfPhoneNumber = rawEmployeePhoneNumber.substring(9, rawEmployeePhoneNumber.length)
-    return `+${countryCode} (${dDD}) ${firstPartOfPhoneNumber}-${secondPartOfPhoneNumber}`
+    const formatedPhoneNumber = `+${countryCode} (${dDD}) ${firstPartOfPhoneNumber}-${secondPartOfPhoneNumber}`
+
+    return formatedPhoneNumber
   }
 
   return (
