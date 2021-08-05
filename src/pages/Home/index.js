@@ -13,13 +13,11 @@ const Home = () => {
   const [text, setText] = useState('')
 
   return (
-    <>
+    <main>
       <Title>Funcionários</Title>
       <SearchInput value={text} onChange={e=> setText(e.target.value)} />
-      <main>
-        <EmployedTable />
-      </main>
-    </>
+      <EmployedTable textToSearch={text} />
+    </main>   
   )  
 }
 

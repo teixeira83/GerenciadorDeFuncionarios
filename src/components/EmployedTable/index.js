@@ -15,6 +15,7 @@ const Table = styled.table`
   font-size: 16px;
   border-collapse: collapse;
 `
+
 const TableHead = styled.thead`
   background-color: ${colors.secondary};
   color: #FFFFFF;
@@ -24,9 +25,10 @@ const TableHead = styled.thead`
     box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.2);
   }
 `
+
 const TableBody = styled.tbody`
   width: 100%;
-  height: 100vh;
+  
   & tr {
     height: 50px;
     box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.2);
@@ -45,7 +47,7 @@ const EmployeeImage = styled.img`
   border-radius: 30px;
 `
 
-const EmployedTable = () => {
+const EmployedTable = ({textToSearch}) => {
   const [employees, setEmployees] = useState([])
   
   useEffect(() => {
@@ -63,20 +65,35 @@ const EmployedTable = () => {
   }
 
   const fomartPhoneNumber = (employeePhoneNumber) => {
-
     const rawEmployeePhoneNumber = employeePhoneNumber
     const countryCode = rawEmployeePhoneNumber.substring(0,2)
     const dDD = rawEmployeePhoneNumber.substring(2,4)
     let firstPartOfPhoneNumber = ''
+
     if(rawEmployeePhoneNumber.length === 12) {
       firstPartOfPhoneNumber = rawEmployeePhoneNumber.substring(4, 8)
     } else {
       firstPartOfPhoneNumber = rawEmployeePhoneNumber.substring(4, 9)
     }
+
     const secondPartOfPhoneNumber = rawEmployeePhoneNumber.substring(9, rawEmployeePhoneNumber.length)
     const formatedPhoneNumber = `+${countryCode} (${dDD}) ${firstPartOfPhoneNumber}-${secondPartOfPhoneNumber}`
 
     return formatedPhoneNumber
+  }
+
+  const thisEmployeeExists = (employee) => {
+    
+    if(textToSearch === '') return employee
+    
+    const employeeNameWithouSpecialCharacters = employee.name.normalize('NFD').replace(/[\u0300-\u036f]/g, "")
+    const employeeNameInLowerCase = employeeNameWithouSpecialCharacters.toLowerCase()
+    const employeeJobInLowerCase = employee.job.toLowerCase()
+    const textToSearchInLowerCase = textToSearch.toLowerCase()
+    
+    return employeeNameInLowerCase.includes(textToSearchInLowerCase) || 
+            employeeJobInLowerCase.includes(textToSearchInLowerCase) ?
+            employee : null
   }
 
   return (
@@ -92,7 +109,7 @@ const EmployedTable = () => {
           </tr>
         </TableHead>
         <TableBody>
-        {employees.map((employee) => {
+        {employees.filter((employee) => thisEmployeeExists(employee)).map((employee) => {
           const formatedAdmissionDate = formatAdmissionDate(employee.admission_date)
           const formatedPhoneNumber = fomartPhoneNumber(employee.phone)
           return (

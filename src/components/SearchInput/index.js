@@ -27,6 +27,7 @@ const Container = styled.div`
     color: #7D7D7D;
   }
 `
+
 const SearchInput = (props) => {
   return (
     <Container>
@@ -37,8 +38,7 @@ const SearchInput = (props) => {
         onChange={props.onChange} 
       />
       <BiSearchAlt2 className='icon'/>
-    </Container>
-    
+    </Container> 
   )
 }
 
