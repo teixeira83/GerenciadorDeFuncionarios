@@ -72,13 +72,25 @@ const EmployedTable = () => {
           const rawAdmissionDate = employee.admission_date
           const formatedAdmissionDate = new Date(rawAdmissionDate)
                                             .toLocaleDateString('pt-BR', {timeZone: 'UTC'})
+          const rawEmployeePhoneNumber = employee.phone
+          const countryCode = rawEmployeePhoneNumber.substring(0,2)
+          const dDD = rawEmployeePhoneNumber.substring(2,4)
+          let firstPartOfPhoneNumber = ''
+          if(rawEmployeePhoneNumber.length === 12) {
+            firstPartOfPhoneNumber = rawEmployeePhoneNumber.substring(4, 8)
+          } else {
+            firstPartOfPhoneNumber = rawEmployeePhoneNumber.substring(4, 9)
+          }
+          const secondPartOfPhoneNumber = rawEmployeePhoneNumber.substring(9, rawEmployeePhoneNumber.length)
+          const formatedPhoneNumber = `+${countryCode} (${dDD}) ${firstPartOfPhoneNumber}-${secondPartOfPhoneNumber}`
+
           return (
             <tr key={employee.id}>
               <td>{<EmployeeImage src={employee.image} alt='Foto do Funcionário' />}</td>
               <td>{employee.name}</td>
               <td>{employee.job}</td>
               <td>{formatedAdmissionDate}</td>
-              <td>{employee.phone}</td>
+              <td>{formatedPhoneNumber}</td>
             </tr> 
           )})}
         </TableBody>
