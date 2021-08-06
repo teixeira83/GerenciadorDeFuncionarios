@@ -34,7 +34,7 @@
 
 <div style="margin-top: 30px">
   <h3 align="left">Detalhes do Projeto</h3>
-  <p>O app tem como objetivo listar os funcionários da empresa detalhando suas informações (Nome, Cargo, Data de Admissão, etc. ). As técnologias utilizadas foram :</p>
+  <p>O app tem como objetivo listar os funcionários da empresa detalhando suas informações (Nome, Cargo, Data de Admissão, etc. ) e facilitar a busca dos funcionários através de um campo de texto que retornará todos os funcionários que tiverem o nome ou cargo digitado. As técnologias utilizadas foram :</p>
 
   <ul>
     <li><a href="https://pt-br.reactjs.org/">React</a></li>
@@ -56,37 +56,42 @@
   <p>Clicando <a href="https://docs.npmjs.com/downloading-and-installing-node-js-and-npm">aqui</a> terá acesso à uma documentação de instalação.</p>
 </div>
 <br>
-<h3 align="left">Rodando o Projeto</p>
+<h3 align="left">Rodando o Projeto</h3>
 
-<p>Faça o clone do repositório para a sua máquina com o comando abaixo ou faça o download do arquivo compactado e extraia onde preferir</p>
+<p>1. Faça o clone do repositório para a sua máquina com o comando abaixo ou faça o download do arquivo compactado e extraia onde preferir</p>
 
 ```
 git clone https://github.com/teixeira83/GerenciadorDeFuncionarios
 ```
 
-<p>Entre na pasta na pasta do projeto</p>
+<p>2. Entre na pasta na pasta do projeto</p>
 
 ```
 cd GerenciadorDeFuncionarios
 ```
 
-<p>Instale as dependências do projeto</p>
+<p>3. Instale as dependências do projeto</p>
 
 ```
 npm i
 ```
 
-<p><bold>Obs:</bold> Como o projeto está consumindo as informações de um servidor json local é necessário subir os dois servidores ( o React e o JsonServer ). Por padrão, quando são iniciados, eles sobem na porta 3000 então é necessário apontar uma porta diferente para um dos serviços. Neste caso subiremos o JsonServer na porta 3009 rodando o seguinte comando na pasta raiz do projeto :</p>
+<p>4. Como o projeto está consumindo as informações de um servidor json local é necessário subir os dois servidores ( o React e o JsonServer ). Por padrão, quando são iniciados, eles sobem na porta 3000 então é necessário apontar uma porta diferente para um dos serviços. Neste caso subiremos o JsonServer na porta 3009 rodando o seguinte comando na pasta raiz do projeto :</p>
 
 ```
 npx json-server --watch database/server.json --port 3009
 ```
 
-<p>Para subir o servidor do React e poder utilizar o projeto basta rodar o seguinte comando na pasta raiz do projeto :</p>
+> Obs: O endpoint que será consumido é http://localhost:3009/employees e para testar se o JsonServer está funcionando é possível acessar pelo browser clicando <a href="http://localhost:3009/employees">aqui</a>
+
+<p>5. Para subir o servidor do React e poder utilizar o projeto basta rodar o seguinte comando na pasta raiz do projeto :</p>
 
 ```
 npm start
 ```
+
+<h4 align="left">Agora o projeto já está rodando, para acessar basta digitar na url do browser http://localhost:3000/ ou clique <a href="http://localhost:3000/">aqui</a></h4>
+
 <br>
 <h3 align="left">Testando o Projeto</h3>
 
