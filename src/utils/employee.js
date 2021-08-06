@@ -10,14 +10,16 @@ export const fomartPhoneNumber = (employeePhoneNumber) => {
   const countryCode = rawEmployeePhoneNumber.substring(0,2)
   const dDD = rawEmployeePhoneNumber.substring(2,4)
   let firstPartOfPhoneNumber = ''
+  let secondPartOfPhoneNumber = ''
 
   if(rawEmployeePhoneNumber.length === 12) {
     firstPartOfPhoneNumber = rawEmployeePhoneNumber.substring(4, 8)
+    secondPartOfPhoneNumber = rawEmployeePhoneNumber.substring(8, rawEmployeePhoneNumber.length)
   } else {
     firstPartOfPhoneNumber = rawEmployeePhoneNumber.substring(4, 9)
+    secondPartOfPhoneNumber = rawEmployeePhoneNumber.substring(9, rawEmployeePhoneNumber.length)
   }
 
-  const secondPartOfPhoneNumber = rawEmployeePhoneNumber.substring(9, rawEmployeePhoneNumber.length)
   const formatedPhoneNumber = `+${countryCode} (${dDD}) ${firstPartOfPhoneNumber}-${secondPartOfPhoneNumber}`
 
   return formatedPhoneNumber
