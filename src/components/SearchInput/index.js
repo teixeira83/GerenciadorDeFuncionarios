@@ -4,7 +4,7 @@ import { BiSearchAlt2 } from 'react-icons/bi'
 
 const Input = styled.input`
   height: 40px;
-  width: 30vw;
+  width: 35vw;
   padding: 5px 10px;
   margin-right: 32px;
   background: #FFFFFF;
@@ -25,6 +25,7 @@ const Container = styled.div`
     position: absolute;
     padding-right: 50px;
     color: #7D7D7D;
+    cursor: pointer;
   }
 `
 

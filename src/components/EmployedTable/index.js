@@ -3,11 +3,16 @@ import styled from 'styled-components'
 import colors from '../../assets/styles/colors'
 import gaps from '../../assets/styles/gaps'
 import { getAllEmployees } from '../../services/employed'
+import { fomartPhoneNumber, formatAdmissionDate, thisEmployeeExists} from '../../utils/employee'
 
 const Container = styled.div`
   width: 93.75%;
   display: flex;
   margin: ${gaps.medium} auto;
+
+  @media(max-width: 600px) {
+    display: none;
+  }
 `
 
 const Table = styled.table`
@@ -32,6 +37,7 @@ const TableBody = styled.tbody`
   & tr {
     height: 50px;
     box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.2);
+    background-color: #FFFFFF;
   }
   
   & > tr > td {
@@ -57,45 +63,6 @@ const EmployedTable = ({textToSearch}) => {
     })()
   }, [])
 
-  const formatAdmissionDate = (employeeAdmissionDate) => {
-    const rawAdmissionDate = employeeAdmissionDate
-    const formatedAdmissionDate = new Date(rawAdmissionDate)
-                                      .toLocaleDateString('pt-BR', {timeZone: 'UTC'})
-    return formatedAdmissionDate                        
-  }
-
-  const fomartPhoneNumber = (employeePhoneNumber) => {
-    const rawEmployeePhoneNumber = employeePhoneNumber
-    const countryCode = rawEmployeePhoneNumber.substring(0,2)
-    const dDD = rawEmployeePhoneNumber.substring(2,4)
-    let firstPartOfPhoneNumber = ''
-
-    if(rawEmployeePhoneNumber.length === 12) {
-      firstPartOfPhoneNumber = rawEmployeePhoneNumber.substring(4, 8)
-    } else {
-      firstPartOfPhoneNumber = rawEmployeePhoneNumber.substring(4, 9)
-    }
-
-    const secondPartOfPhoneNumber = rawEmployeePhoneNumber.substring(9, rawEmployeePhoneNumber.length)
-    const formatedPhoneNumber = `+${countryCode} (${dDD}) ${firstPartOfPhoneNumber}-${secondPartOfPhoneNumber}`
-
-    return formatedPhoneNumber
-  }
-
-  const thisEmployeeExists = (employee) => {
-    
-    if(textToSearch === '') return employee
-    
-    const employeeNameWithouSpecialCharacters = employee.name.normalize('NFD').replace(/[\u0300-\u036f]/g, "")
-    const employeeNameInLowerCase = employeeNameWithouSpecialCharacters.toLowerCase()
-    const employeeJobInLowerCase = employee.job.toLowerCase()
-    const textToSearchInLowerCase = textToSearch.toLowerCase()
-    
-    return employeeNameInLowerCase.includes(textToSearchInLowerCase) || 
-            employeeJobInLowerCase.includes(textToSearchInLowerCase) ?
-            employee : null
-  }
-
   return (
     <Container>
       <Table>
@@ -109,7 +76,7 @@ const EmployedTable = ({textToSearch}) => {
           </tr>
         </TableHead>
         <TableBody>
-        {employees.filter((employee) => thisEmployeeExists(employee)).map((employee) => {
+        {employees.filter((employee) => thisEmployeeExists(employee, textToSearch)).map((employee) => {
           const formatedAdmissionDate = formatAdmissionDate(employee.admission_date)
           const formatedPhoneNumber = fomartPhoneNumber(employee.phone)
           return (
