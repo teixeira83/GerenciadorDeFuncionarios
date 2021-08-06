@@ -5,10 +5,12 @@ import gaps from '../../assets/styles/gaps'
 import { getAllEmployees } from '../../services/employed'
 import { fomartPhoneNumber, formatAdmissionDate, thisEmployeeExists} from '../../utils/employee'
 
-const Container = styled.div`
+const Wrapper = styled.div`
   width: 93.75%;
   display: flex;
   margin: ${gaps.medium} auto;
+  overflow: auto;
+  border-radius: 4px 4px 0px 0px;
 
   @media(max-width: 600px) {
     display: none;
@@ -18,7 +20,7 @@ const Container = styled.div`
 const Table = styled.table`
   width: 100%;
   font-size: 16px;
-  border-collapse: collapse;
+  border-spacing: 0;
 `
 
 const TableHead = styled.thead`
@@ -64,7 +66,7 @@ const EmployedTable = ({textToSearch}) => {
   }, [])
 
   return (
-    <Container>
+    <Wrapper>
       <Table>
         <TableHead>
           <tr>
@@ -90,7 +92,7 @@ const EmployedTable = ({textToSearch}) => {
           )})}
         </TableBody>
       </Table>
-    </Container>
+    </Wrapper>
   )
 }
 
